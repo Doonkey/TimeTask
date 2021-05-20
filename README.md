@@ -1,4 +1,4 @@
-# 计划任务组件
+# 计划任务组件[![](https://jitpack.io/v/Doonkey/TimeTask.svg)](https://jitpack.io/#Doonkey/TimeTask)
 
 根据系统闹钟的定时任务，按任务的执行时间顺序依次执行，可动态添加及取消任务。
 
@@ -25,7 +25,7 @@ maven { url '[https://jitpack.io](https://jitpack.io)' }
 
 }
 
-Step 2. 在module添加依赖
+Step 2. 在module添加依赖[![](https://jitpack.io/v/Doonkey/TimeTask.svg)](https://jitpack.io/#Doonkey/TimeTask)
 
 dependencies {
 
