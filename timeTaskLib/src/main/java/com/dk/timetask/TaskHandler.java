@@ -42,6 +42,20 @@ class TaskHandler<T extends Task> implements ITaskHandler<T>{
         mTaskCallBacks.add(callBack);
     }
 
+    @Override
+    public void setTask(T... tasks) {
+        cancelAllTask();
+        Collections.addAll(mTasks, tasks);
+        //按照时间先后顺序排序
+        Collections.sort(mTasks, new Comparator<T>() {
+            @Override
+            public int compare(T o1, T o2) {
+                return Long.compare(o1.getStarTime(), o2.getStarTime());
+            }
+        });
+        nextTask();
+    }
+
     /**
      * 添加任务 添加的任务按照任务的startTime先后顺序排序
      * @param tasks 任务
