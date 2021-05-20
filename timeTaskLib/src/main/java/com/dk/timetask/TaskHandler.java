@@ -58,22 +58,12 @@ class TaskHandler<T extends Task> implements ITaskHandler<T>{
             }
         });
         //当前有任务时先停止任务
-        if (mDoTaskMap.size() > 0){
-            boolean removeTask = true;
-            String taskId = "";
-            Iterator<String> taskIdsIterator = mDoTaskMap.keySet().iterator();
-            if (taskIdsIterator.hasNext()){
-                taskId = taskIdsIterator.next();
-                for (T task : mTasks) {
-                    if (task.getTaskId().equals(taskId)){
-                        if (task.getStarTime() > System.currentTimeMillis()){
-                            removeTask = false;
-                        }
-                        break;
-                    }
-                }
+        Iterator<String> taskIdsIterator = mDoTaskMap.keySet().iterator();
+        if (taskIdsIterator.hasNext()){
+            String taskId = taskIdsIterator.next();
+            if (!mTasks.get(0).getTaskId().equals(taskId)) {
+                cancelTask(taskId, false);
             }
-            cancelTask(taskId, removeTask);
         }else {
             nextTask();
         }
