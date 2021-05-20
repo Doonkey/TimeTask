@@ -32,9 +32,8 @@ class TaskHandler<T extends Task> implements ITaskHandler<T>{
     private final List<TaskCallBack<T>> mTaskCallBacks = new ArrayList<>();
     private final ArrayList<T> mTasks= new ArrayList<>();
     private final HashMap<String, PendingIntent> mDoTaskMap = new HashMap<>();
-
-    public TaskHandler(Context mContext) {
-        this.mContext = mContext.getApplicationContext();
+    public TaskHandler(Context context) {
+        this.mContext = context.getApplicationContext();
         mContext.registerReceiver(taskReceiver, new IntentFilter("action.task"));
     }
 
