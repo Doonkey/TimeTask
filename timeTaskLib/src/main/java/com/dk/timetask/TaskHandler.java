@@ -129,12 +129,12 @@ class TaskHandler<T extends Task> implements ITaskHandler<T>{
         }
     }
 
-    private void start(){
+    private synchronized void start(){
         if (mTasks.size() > 0){
             T mTask = mTasks.get(0);
             long mNowTime = System.currentTimeMillis();
             //在当前区间内立即执行
-            if (mTask.getStarTime() < mNowTime && mTask.getEndTime() > mNowTime) {
+            if (mTask.getStarTime() <= mNowTime && mTask.getEndTime() > mNowTime) {
                 for (TaskCallBack<T> taskCallBack : mTaskCallBacks) {
                     taskCallBack.taskExecute(mTask);
                 }
@@ -152,7 +152,7 @@ class TaskHandler<T extends Task> implements ITaskHandler<T>{
                 return;
             }
             //消息已过期
-            if (mTask.getEndTime() < mNowTime) {
+            if (mTask.getEndTime() <= mNowTime) {
                 for (TaskCallBack<T> taskCallBack : mTaskCallBacks) {
                     taskCallBack.taskOverdue(mTask);
                 }
